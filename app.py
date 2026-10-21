@@ -52,14 +52,6 @@ custom_css = """
         margin-bottom: 5px;
     }
 
-    .hero-subtitle {
-        color: var(--accent-teal);
-        font-family: 'Fira Code', monospace;
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin-bottom: 15px;
-    }
-
     /* Status Metric Box */
     .metric-card {
         background-color: rgba(30, 111, 184, 0.3);
@@ -131,7 +123,6 @@ with st.sidebar:
     st.markdown("### 💻 SYSTEM METRICS")
     st.markdown("---")
     
-    # Custom Profile Card
     st.markdown("""
         <div class="metric-card">
             <div class="metric-label">Developer</div>
@@ -154,7 +145,6 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("### 🔗 NETWORK / CONTACT")
     
-    # URL Github sasenasea05
     st.markdown("🐙 **GitHub:** [github.com/sasenasea05](https://github.com/sasenasea05)")
     st.markdown("📧 **Email:** [sabrinasnanda0509@gmail.com](mailto:sabrinasnanda0509@gmail.com)")
     st.markdown("📷 **Instagram:** [@sabrinassn_](https://instagram.com/sabrinassn_)")
@@ -166,7 +156,7 @@ with st.sidebar:
 st.markdown("""
     <div class="hero-box">
         <div class="hero-title">SABRINA SEPTIANANDA</div>
-        <p style="color: #e8eaf0; font-size: 1.05rem;">
+        <p style="color: #e8eaf0; font-size: 1.05rem; margin: 0;">
             Mahasiswi Sistem Informasi dengan fokus pada <b>Java Web Development</b>, <b>Data Automation</b>, 
             serta <b>Machine Learning Classification</b>. Berpengalaman aktif dalam organisasi kampus dan pengembangan proyek perangkat lunak.
         </p>
@@ -226,7 +216,9 @@ with tab_org:
         </div>
     """, unsafe_allow_html=True)
 
-# --- TAB 3: SERTIFIKAT ---
+# ---------------------------------------------------------
+# TAB 3: SERTIFIKAT & PRESTASI
+# ---------------------------------------------------------
 with tab_cert:
     st.subheader("CERTIFICATES & AWARDS")
     st.caption("Bukti sertifikat dan prestasi yang telah diraih.")
@@ -261,34 +253,9 @@ with tab_cert:
                 </div>
             """, unsafe_allow_html=True)
             
-            # Langsung tampilkan gambar tanpa file_uploader
+            # Tampilkan gambar secara langsung tanpa file_uploader
             try:
                 st.image(cert['img'], use_column_width=True)
             except Exception:
                 st.info(f"Gambar `{cert['img']}` belum ditemukan di repository.")
-            st.divider()
-    
-    c1, c2 = st.columns(2)
-    cols = [c1, c2]
-    
-    for idx, cert in enumerate(certificates):
-        with cols[idx % 2]:
-            st.markdown(f"""
-                <div class="cert-card">
-                    <div class="cert-title">{cert['title']}</div>
-                    <div class="cert-tag">📌 {cert['category']} | 🏆 {cert['rank']}</div>
-                    <p style="margin-top: 8px; font-size: 0.9rem;">{cert['desc']}</p>
-                </div>
-            """, unsafe_allow_html=True)
-            
-            # Fitur Upload / Tampil Gambar
-            uploaded_file = st.file_uploader(f"Upload Gambar ({cert['title']})", type=['jpg', 'jpeg', 'png'], key=f"file_{idx}")
-            
-            if uploaded_file is not None:
-                st.image(uploaded_file, use_column_width=True)
-            else:
-                try:
-                    st.image(cert['img'], use_column_width=True)
-                except:
-                    st.info(f"💡 Simpan gambar `{cert['img']}` di folder project atau gunakan tombol Upload di atas.")
             st.divider()
