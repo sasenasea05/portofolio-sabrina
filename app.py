@@ -226,29 +226,47 @@ with tab_org:
         </div>
     """, unsafe_allow_html=True)
 
-# ---------------------------------------------------------
-# TAB 3: SERTIFIKAT & PRESTASI
-# ---------------------------------------------------------
+# --- TAB 3: SERTIFIKAT ---
 with tab_cert:
     st.subheader("CERTIFICATES & AWARDS")
-    st.caption("Pilih file gambar sertifikat atau gunakan preview tautan yang ada.")
+    st.caption("Bukti sertifikat dan prestasi yang telah diraih.")
     
     certificates = [
         {
             "title": "PKM Internal Universitas Dirgantara Marsekal Suryadarma",
             "category": "PRESTASI AKADEMIK",
             "rank": "HARAPAN 2 (LOKAL)",
-            "desc": "Penghargaan karya tulis Program Kreativitas Mahasiswa tingkat internal kampus.",
+            "desc": "Penghargaan Juara Harapan 2 Lomba Penyusunan Proposal PKM 2026.",
             "img": "sertifikat_pkm.jpg"
         },
         {
-            "title": "Sertifikat Web Seminar / Tech Workshop",
+            "title": "Sertifikat Pelatihan Digital Talent Scholarship 2026",
             "category": "SEMINAR & WORKSHOP",
             "rank": "PESERTA",
-            "desc": "Sertifikat partisipasi dalam pelatihan dan diskusi teknologi web/data.",
-            "img": "sertifikat_seminar.jpg"
+            "desc": "Pelatihan Membangun Lab Virtual & Dasar Linux Micro Skill Komdigi.",
+            "img": "sertifikat_komdigi.jpg"
         }
     ]
+    
+    c1, c2 = st.columns(2)
+    cols = [c1, c2]
+    
+    for idx, cert in enumerate(certificates):
+        with cols[idx % 2]:
+            st.markdown(f"""
+                <div class="cert-card">
+                    <div class="cert-title">{cert['title']}</div>
+                    <div class="cert-tag">📌 {cert['category']} | 🏆 {cert['rank']}</div>
+                    <p style="margin-top: 8px; font-size: 0.9rem;">{cert['desc']}</p>
+                </div>
+            """, unsafe_allow_html=True)
+            
+            # Langsung tampilkan gambar tanpa file_uploader
+            try:
+                st.image(cert['img'], use_column_width=True)
+            except Exception:
+                st.info(f"Gambar `{cert['img']}` belum ditemukan di repository.")
+            st.divider()
     
     c1, c2 = st.columns(2)
     cols = [c1, c2]
